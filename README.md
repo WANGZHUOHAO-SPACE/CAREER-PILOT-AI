@@ -1,3 +1,11 @@
+CareerPilot AI｜多用户 AI 求职 Agent 平台
+技术栈： Java 21 / Spring Boot / Spring AI / Spring Security / JWT / MyBatis-Plus / MySQL / PostgreSQL / pgvector / Vue 3 / TypeScript / Docker / Nginx / SSE / MCP
+- 基于 Spring Boot + Spring AI 从 0 到 1 搭建多用户 AI 求职 Agent，支持多轮对话、Tool Calling、RAG 知识库、MCP、岗位与投递管理等功能，并通过 JWT + BCrypt 实现用户认证与数据隔离。
+- 设计 Persistent Conversation Memory，将会话及消息持久化至 MySQL，后端重启后可恢复历史上下文；区分长期聊天历史与 LLM Context Window，控制单次注入消息数量，避免上下文无限膨胀。
+- 使用 PostgreSQL + pgvector 构建持久化 RAG，采用 vector(1536)、HNSW + Cosine 检索，并在数据库查询阶段基于 userId 进行 metadata 过滤，完成多用户知识库隔离与重启持久化验证。
+- 实现基于 SSE 的流式对话与 Run Lifecycle，支持实时 Token 输出、生成状态、Stop/Cancel、失败处理和历史消息持久化；通过 Nginx 关闭 buffering，完成 Browser → Nginx → Backend 的真实流式链路验收。
+- 构建 AI Observability 体系，记录 requestId / runId / TTFT / latency / Memory / RAG / Tool / LLM Trace，支持请求追踪、工具调用统计和跨用户 IDOR 防护，同时避免在观测日志中持久化完整 Prompt、Answer 和 RAG Chunk。
+- 完成 Docker Compose 部署、Rate Limiting、上传安全、输入限制、安全响应头及公开仓库安全检查；后端 91 个自动化测试全部通过，前端通过 Vue/TypeScript 构建，并将最大 JS Chunk 从 1099 KB 优化至约 210 KB。
 # CareerPilot AI
 
 An AI-powered career assistant built with Spring Boot, Spring AI, Vue, MySQL and PostgreSQL/pgvector.
