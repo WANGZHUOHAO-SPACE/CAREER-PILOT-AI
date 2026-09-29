@@ -166,4 +166,5 @@ docs/                         # architecture/development/demo/evidence
 - Standard Nginx image uses root master and non-root workers; backend is UID 10001.
 - No selected License yet. Decide licensing before inviting third-party reuse.
 
-Stage 17 prepares the project for publication; it does not upload GitHub, configure remote Settings or create a release.
+
+
