@@ -1,0 +1,17 @@
+# Explicit local acceptance only. All OpenAI auto-configurations are disabled.
+spring:
+  ai:
+    model:
+      chat: none
+      embedding: none
+      image: none
+      moderation: none
+      audio:
+        speech: none
+        transcription: none
+    openai:
+      api-key: ""
+app:
+  local-test:
+    enabled: ${LOCAL_TEST_EMBEDDING_ENABLED:false}
+    stream-delay-ms: ${LOCAL_TEST_STREAM_DELAY_MS:100}

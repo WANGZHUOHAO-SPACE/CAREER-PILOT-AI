@@ -1,0 +1,14 @@
+.git/
+.idea/
+.vscode/
+frontend/
+target/
+examples/
+sql/*
+!sql/migrate-v15.sql
+!sql/migrate-v16.sql
+tomcat*/
+.env
+.env.*
+*.log
+README.md

@@ -1,0 +1,108 @@
+{
+  "stage": 16,
+  "status": "VERIFIED_LOCAL_TEST",
+  "verificationDate": "2026-09-29",
+  "modelMode": "LOCAL_TEST_OR_MOCK",
+  "latestLocalVerification": {
+    "backendTest": {
+      "command": "mvn -B -ntp clean test",
+      "result": "BUILD SUCCESS",
+      "tests": 83,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "finishedAt": "2026-09-29T12:34:19+08:00"
+    },
+    "backendPackage": {
+      "command": "mvn -B -ntp clean package",
+      "result": "BUILD SUCCESS",
+      "tests": 83,
+      "finishedAt": "2026-09-29T12:34:51+08:00"
+    },
+    "frontendInstall": {
+      "directory": "frontend",
+      "command": "npm ci",
+      "result": "PASS",
+      "packagesInstalled": 109
+    },
+    "frontendBuild": {
+      "directory": "frontend",
+      "command": "npm run build",
+      "result": "PASS",
+      "typeCheck": "vue-tsc --noEmit",
+      "viteBuildSeconds": 10.92,
+      "warning": "A bundled chunk exceeds 500 kB; this is a warning, not a disabled check."
+    },
+    "composeConfig": {
+      "command": "docker compose --env-file .env.rag-acceptance -p career-pilot-rag-acceptance -f docker-compose.yml -f docker-compose.local-test.yml config --quiet",
+      "result": "PASS"
+    }
+  },
+  "earlierDockerVerification": {
+    "evidence": "streaming-acceptance-results.json",
+    "httpFinishedAt": "2026-09-28T22:48:01.859714+00:00",
+    "httpCommand": "python scripts/verify-streaming.py",
+    "httpResultAtThatRevision": "PASS",
+    "runs": {
+      "COMPLETED": 7,
+      "CANCELLED": 1,
+      "FAILED": 1
+    },
+    "throughNginx": true,
+    "migrationExecutedTwice": "PASS",
+    "backendRestartHistoryAndMemory": "PASS",
+    "ragStreaming": "PASS",
+    "toolStreaming": "PASS",
+    "cancelIdorHttpStatus": 404,
+    "sameConversationDuplicateHttpStatus": 409,
+    "laterDockerBuildResult": "PASS",
+    "testsInLaterDockerBuild": 82,
+    "laterComposeUpResult": "PASS",
+    "note": "The preserved HTTP evidence predates the final Origin forwarding and pre-queue USER persistence refinements. It must not be treated as a rerun of the final revision."
+  },
+  "mockToolLoopUsageTest": {
+    "input": 300,
+    "output": 70,
+    "total": 370,
+    "result": "PASS",
+    "realProvider": false
+  },
+  "realOpenAiStreaming": "UNVERIFIED",
+  "realOpenAiTtft": "UNVERIFIED",
+  "realSupplierCancellation": "UNVERIFIED",
+  "realSupplierTokenUsage": "UNVERIFIED",
+  "previousDockerBlocker": {
+    "status": "UNAVAILABLE",
+    "cause": "Docker Desktop initialization fails at its temporary sailor-ingest.sock file.",
+    "userResponse": "暂时无法启动",
+    "latestRuntimeRetest": "UNVERIFIED",
+    "latestBrowserLoginChatStop": "UNVERIFIED",
+    "latestOriginAwareHttpRetest": "UNVERIFIED",
+    "volumesDeleted": false,
+    "factoryResetPerformed": false
+  },
+  "currentDockerEnvironment": {
+    "status": "AVAILABLE",
+    "engineVersion": "29.8.0",
+    "composeVersion": "v5.5.1",
+    "config": "PASS",
+    "build": "PASS",
+    "up": "PASS",
+    "ps": "PASS",
+    "finalHttpRetest": "PASS",
+    "finalBrowserLoginChatStop": "PASS",
+    "volumesDeleted": false,
+    "factoryResetPerformed": false
+  },
+  "finalClosureEvidence": {
+    "report": "stage16-seal-report.md",
+    "http": "streaming-final-http-results.json",
+    "browser": "streaming-final-browser-results.json",
+    "database": "streaming-final-database-results.json",
+    "deployment": "streaming-final-deployment-results.json"
+  },
+  "finalAcceptanceFixes": [
+    "One-line reactive authentication computed dependency ordering fix",
+    "Local-only fixture recognizes optional final phrase; regression tested red then green"
+  ]
+}

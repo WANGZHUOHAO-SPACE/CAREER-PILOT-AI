@@ -1,0 +1,78 @@
+{
+  "startedAt": "2026-09-28T22:33:51.005211+00:00",
+  "mode": "LOCAL_TEST",
+  "realLlmMemory": "UNVERIFIED",
+  "phases": [
+    {
+      "name": "multi-round-recall",
+      "status": "PASS",
+      "memoryCount": 2
+    },
+    {
+      "name": "backend-restart",
+      "status": "PASS",
+      "historyRowsA": 6
+    },
+    {
+      "name": "compose-down-up",
+      "status": "PASS",
+      "historyRowsA": 8
+    }
+  ],
+  "users": {
+    "A": 6,
+    "B": 7
+  },
+  "conversations": {
+    "A": "fdbe99f7-8c31-42ea-81f7-db01b1814653",
+    "B": "e355110a-e330-4117-b58d-c4a03cb502b2"
+  },
+  "idor": {
+    "messages": 404,
+    "rename": 404,
+    "delete": 404,
+    "chat": 404,
+    "trace": 404
+  },
+  "memoryRag": {
+    "status": "PASS",
+    "events": [
+      "AI_REQUEST",
+      "MEMORY",
+      "RAG_SEARCH",
+      "LLM",
+      "AI_REQUEST"
+    ],
+    "chunkCount": 1,
+    "topK": 4
+  },
+  "window": {
+    "historyCount": 26,
+    "injectedCount": 20,
+    "pagination": "PASS"
+  },
+  "mysqlBeforeDelete": {
+    "owners": 2,
+    "messageCount": 46,
+    "conversationRows": 4
+  },
+  "messageStructure": {
+    "rows": 46,
+    "roles": "ASSISTANT,USER",
+    "sequencePopulated": 46,
+    "createdAtPopulated": 46,
+    "requestIdsPopulated": 46
+  },
+  "mysqlIndexes": {
+    "messageIndexes": 2,
+    "conversationIndexes": 3
+  },
+  "deleteIsolation": {
+    "status": "PASS",
+    "remainingDeletedConversationMessages": 0,
+    "userBHistoryRows": 10
+  },
+  "titleAutoAndManual": "PASS",
+  "status": "PASS",
+  "finishedAt": "2026-09-28T22:34:32.470915+00:00"
+}

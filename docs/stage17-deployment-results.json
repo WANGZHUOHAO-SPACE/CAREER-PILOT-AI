@@ -1,0 +1,63 @@
+{
+  "backend": {
+    "imageBytes": 653270093,
+    "imageMiB": 623.01,
+    "configuredUser": "10001:10001",
+    "securityOptions": [
+      "no-new-privileges:true"
+    ],
+    "runtimeImage": "career-pilot-rag-acceptance-backend"
+  },
+  "frontend": {
+    "imageBytes": 93781093,
+    "imageMiB": 89.44,
+    "configuredUser": "",
+    "securityOptions": [
+      "no-new-privileges:true"
+    ],
+    "runtimeImage": "career-pilot-rag-acceptance-frontend"
+  },
+  "backendRuntimeFiles": [
+    "uid=10001 gid=10001 groups=10001",
+    "app.jar",
+    "runtime-content-clean"
+  ],
+  "frontendRuntimeFiles": [
+    "nginx-dist-only",
+    "USER     COMMAND",
+    "root     nginx",
+    "nginx    nginx",
+    "nginx    nginx",
+    "nginx    nginx",
+    "nginx    nginx",
+    "nginx    nginx",
+    "nginx    nginx",
+    "nginx    nginx",
+    "nginx    nginx",
+    "nginx    nginx",
+    "nginx    nginx",
+    "nginx    nginx",
+    "nginx    nginx",
+    "nginx    nginx",
+    "nginx    nginx",
+    "nginx    nginx",
+    "nginx    nginx",
+    "root     ps"
+  ],
+  "vectorColumn": "vector(1536)",
+  "hnswIndex": "1",
+  "composeStates": [
+    "NAME                                            IMAGE                                   COMMAND                  SERVICE           CREATED              STATUS                        PORTS",
+    "career-pilot-rag-acceptance-backend-1           career-pilot-rag-acceptance-backend     \"java -jar /app/app.\u2026\"   backend           About a minute ago   Up About a minute (healthy)   8080/tcp",
+    "career-pilot-rag-acceptance-frontend-1          career-pilot-rag-acceptance-frontend    \"/docker-entrypoint.\u2026\"   frontend          About a minute ago   Up About a minute             127.0.0.1:18088->80/tcp",
+    "career-pilot-rag-acceptance-mysql-1             mysql:8.4                               \"docker-entrypoint.s\u2026\"   mysql             22 minutes ago       Up 21 minutes (healthy)       3306/tcp, 33060/tcp",
+    "career-pilot-rag-acceptance-postgres-vector-1   pgvector/pgvector:0.8.6-pg16-bookworm   \"docker-entrypoint.s\u2026\"   postgres-vector   10 hours ago         Up 25 minutes (healthy)       5432/tcp"
+  ],
+  "health": {
+    "status": "UP",
+    "application": "career-pilot-ai",
+    "database": "UP",
+    "vectorDatabase": "UP",
+    "mode": "LOCAL_TEST"
+  }
+}

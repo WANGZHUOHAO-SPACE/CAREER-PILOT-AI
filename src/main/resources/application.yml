@@ -1,0 +1,62 @@
+spring:
+  application:
+    name: career-pilot-ai
+  datasource:
+    url: ${DB_URL:jdbc:mysql://localhost:3306/career_pilot_ai?useUnicode=true&characterEncoding=utf8&serverTimezone=Asia/Shanghai}
+    username: ${DB_USERNAME:root}
+    password: ${DB_PASSWORD}
+  ai:
+    tools:
+      throw-exception-on-error: true
+      limits:
+        max-calls-per-tool-default: 4
+        max-total-tool-calls: 12
+    mcp:
+      server:
+        enabled: false
+        protocol: STREAMABLE
+        name: career-pilot-ai
+        version: 1.0.0
+        type: SYNC
+        instructions: "提供求职简历、岗位匹配、申请查询和个人知识库检索，只读。"
+        capabilities:
+          resource: false
+          prompt: false
+          completion: false
+    openai:
+      api-key: ${OPENAI_API_KEY}
+      chat:
+        model: ${OPENAI_MODEL:gpt-5-mini}
+      embedding:
+        model: ${OPENAI_EMBEDDING_MODEL:text-embedding-3-small}
+  servlet:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 10MB
+
+app:
+  rate-limit:
+    chat: ${AI_CHAT_RATE_LIMIT:20}
+    upload: ${AI_UPLOAD_RATE_LIMIT:5}
+  chat-memory:
+    max-messages: ${CHAT_MEMORY_MAX_MESSAGES:20}
+  pgvector:
+    host: ${PGVECTOR_HOST:localhost}
+    port: ${PGVECTOR_PORT:5432}
+    database: ${PGVECTOR_DATABASE:career_pilot_vector}
+    username: ${PGVECTOR_USERNAME:career_pilot}
+    password: ${PGVECTOR_PASSWORD:}
+    dimensions: ${PGVECTOR_DIMENSIONS:1536}
+    initialize-schema: ${PGVECTOR_INITIALIZE_SCHEMA:true}
+    validate-schema: ${PGVECTOR_VALIDATE_SCHEMA:true}
+  jwt:
+    secret: ${JWT_SECRET}
+  mcp:
+    private-tools-enabled: false
+
+server:
+  address: ${SERVER_ADDRESS:127.0.0.1}
+
+logging:
+  pattern:
+    level: "%5p [requestId=%X{requestId} userId=%X{userId}]"

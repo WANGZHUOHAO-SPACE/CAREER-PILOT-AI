@@ -1,0 +1,29 @@
+{
+  "mode": "LOCAL_TEST",
+  "entry": "http://127.0.0.1:18088",
+  "finishedAt": "2026-09-29T04:37:25.392588+00:00",
+  "registration": "PASS",
+  "login": "PASS",
+  "conversationList": "PASS",
+  "thinkingAndGeneratingStatus": "PASS",
+  "incrementalTextDisplay": "PASS",
+  "completedHistoryAfterReload": "PASS",
+  "stopButton": "PASS",
+  "cancelledHistoryAfterReload": "PASS",
+  "applicationConsoleErrorsAfterSuccessfulLogin": 0,
+  "originCorsAuthorizationSseParsing": "PASS",
+  "browserCancelRequestId": "57818031-4103-4324-bf03-cd80213cbdc6",
+  "mysqlCancelRow": "CANCELLED\t2\tCANCELLED\t1\t1\t0",
+  "screenshots": [
+    "screenshots/stage16-streaming-live.png",
+    "screenshots/stage16-before-stop.png",
+    "screenshots/stage16-after-stop.png",
+    "screenshots/stage16-history-restored.png"
+  ],
+  "initialProblemsResolved": [
+    "Reactive authentication computed did not read user state when no token existed; reordered dependencies.",
+    "Local deterministic fixture did not recognize optional final phrase; added matching and a regression assertion."
+  ],
+  "realOpenAiStreaming": "UNVERIFIED",
+  "finalDeploymentHistoryReload": "PASS"
+}

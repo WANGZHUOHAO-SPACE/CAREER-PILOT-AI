@@ -1,0 +1,27 @@
+{
+  "userScope": "Two final HTTP fixture users and one final browser fixture user",
+  "runStates": [
+    "COMPLETED\t11",
+    "CANCELLED\t2",
+    "FAILED\t1"
+  ],
+  "conversations": 9,
+  "messages": [
+    "USER\tSENT\t14",
+    "ASSISTANT\tCOMPLETED\t11"
+  ],
+  "observations": [
+    "SUCCESS\t11",
+    "CANCELLED\t2",
+    "FAILED\t1"
+  ],
+  "traceEvents": [
+    "AI_REQUEST\t28",
+    "LLM\t14",
+    "MEMORY\t14",
+    "RAG_SEARCH\t14",
+    "TOOL_CALL\t1"
+  ],
+  "duplicateAssistantRequests": 0,
+  "realProviderTokensPresent": 0
+}

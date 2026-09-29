@@ -1,0 +1,45 @@
+{
+  "test": {
+    "command": "mvn -B -ntp clean test",
+    "tests": 91,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "result": "BUILD SUCCESS"
+  },
+  "package": {
+    "command": "mvn -B -ntp clean package",
+    "tests": 91,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "result": "BUILD SUCCESS"
+  },
+  "frontend": {
+    "commands": [
+      "npm ci",
+      "npm run build"
+    ],
+    "result": "PASS",
+    "largestJsKb": 210.16,
+    "largestJsGzipKb": 80.16,
+    "over500KbWarning": false
+  },
+  "docker": {
+    "configuration": "PASS",
+    "build": "PASS",
+    "up": "PASS",
+    "project": "career-pilot-rag-acceptance",
+    "profile": "prod,local-test-embedding",
+    "httpEntry": "http://127.0.0.1:18088",
+    "smoke": "PASS"
+  },
+  "publicationCheck": "PASS",
+  "yamlAndCiConfig": "PASS",
+  "remoteGitHubActions": "UNVERIFIED",
+  "realOpenAiChat": "UNVERIFIED",
+  "realOpenAiEmbedding": "UNVERIFIED",
+  "realOpenAiStreaming": "UNVERIFIED",
+  "realProviderTokenUsage": "UNVERIFIED",
+  "providerSideCancellation": "UNVERIFIED"
+}

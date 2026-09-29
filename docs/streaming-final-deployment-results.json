@@ -1,0 +1,75 @@
+{
+  "verifiedAt": "2026-09-29T04:38:22.655596+00:00",
+  "entry": "http://127.0.0.1:18088",
+  "health": {
+    "status": "UP",
+    "application": "career-pilot-ai",
+    "database": "UP",
+    "vectorDatabase": "UP"
+  },
+  "nginxBufferingOff": true,
+  "nginxCacheOff": true,
+  "hostPortPreserved": true,
+  "containers": [
+    {
+      "Service": "backend",
+      "State": "running",
+      "Health": "healthy",
+      "Publishers": [
+        {
+          "URL": "",
+          "TargetPort": 8080,
+          "PublishedPort": 0,
+          "Protocol": "tcp"
+        }
+      ]
+    },
+    {
+      "Service": "frontend",
+      "State": "running",
+      "Health": "",
+      "Publishers": [
+        {
+          "URL": "127.0.0.1",
+          "TargetPort": 80,
+          "PublishedPort": 18088,
+          "Protocol": "tcp"
+        }
+      ]
+    },
+    {
+      "Service": "mysql",
+      "State": "running",
+      "Health": "healthy",
+      "Publishers": [
+        {
+          "URL": "",
+          "TargetPort": 3306,
+          "PublishedPort": 0,
+          "Protocol": "tcp"
+        },
+        {
+          "URL": "",
+          "TargetPort": 33060,
+          "PublishedPort": 0,
+          "Protocol": "tcp"
+        }
+      ]
+    },
+    {
+      "Service": "postgres-vector",
+      "State": "running",
+      "Health": "healthy",
+      "Publishers": [
+        {
+          "URL": "",
+          "TargetPort": 5432,
+          "PublishedPort": 0,
+          "Protocol": "tcp"
+        }
+      ]
+    }
+  ],
+  "streamDelayMs": "100",
+  "status": "PASS"
+}

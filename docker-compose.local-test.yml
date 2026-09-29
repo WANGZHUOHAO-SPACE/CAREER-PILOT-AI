@@ -1,0 +1,23 @@
+# Explicit override for isolated local acceptance. Never use this override for production.
+services:
+  postgres-vector:
+    command: ["postgres", "-c", "shared_preload_libraries=pg_stat_statements"]
+  backend:
+    environment:
+      SPRING_PROFILES_ACTIVE: prod,local-test-embedding
+      LOCAL_TEST_EMBEDDING_ENABLED: "true"
+      LOCAL_TEST_STREAM_DELAY_MS: ${LOCAL_TEST_STREAM_DELAY_MS:-100}
+      OPENAI_API_KEY: ""
+      PGVECTOR_DIMENSIONS: "1536"
+  frontend:
+    ports: !override
+      - "127.0.0.1:${LOCAL_TEST_WEB_PORT:-18088}:80"
+    networks:
+      - default
+      - local-ingress
+
+# Backend/databases have no external egress; only Nginx joins the loopback ingress bridge.
+networks:
+  default:
+    internal: true
+  local-ingress: {}

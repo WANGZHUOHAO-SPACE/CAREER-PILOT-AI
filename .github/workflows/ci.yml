@@ -1,0 +1,86 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  config-check:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v7
+      - name: Check tracked secrets and ignored config
+        run: python3 scripts/check-ci-config.py
+      - name: Check public repository hygiene
+        run: |
+          python3 scripts/test_pre_public_check.py
+          python3 scripts/pre-public-check.py
+
+  backend-test:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-java@v6
+        with:
+          distribution: temurin
+          java-version: '21'
+          cache: maven
+      - name: Test backend
+        run: mvn -B -ntp clean test
+      - name: Package backend
+        run: mvn -B -ntp clean package
+      - uses: actions/upload-artifact@v7
+        with:
+          name: career-pilot-backend-jar
+          path: target/career-pilot-ai-1.0.0.jar
+          if-no-files-found: error
+          retention-days: 7
+
+  frontend-build:
+    runs-on: ubuntu-24.04
+    defaults:
+      run:
+        working-directory: frontend
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version: '24'
+          cache: npm
+          cache-dependency-path: frontend/package-lock.json
+      - name: Install frontend dependencies
+        run: npm ci
+      - name: Type-check and build frontend
+        run: npm run build
+      - uses: actions/upload-artifact@v7
+        with:
+          name: career-pilot-frontend-dist
+          path: frontend/dist/
+          if-no-files-found: error
+          retention-days: 7
+
+  docker-build:
+    runs-on: ubuntu-24.04
+    needs: [config-check, backend-test, frontend-build]
+    steps:
+      - uses: actions/checkout@v7
+      - name: Validate Compose configuration
+        run: docker compose config --quiet
+        env:
+          MYSQL_DATABASE: career_pilot_ai
+          MYSQL_USER: career_pilot
+          MYSQL_PASSWORD: ci-only
+          MYSQL_ROOT_PASSWORD: ci-only
+          PGVECTOR_DATABASE: career_pilot_vector
+          PGVECTOR_USERNAME: career_pilot
+          PGVECTOR_PASSWORD: ci-only
+          OPENAI_API_KEY: ci-only
+          JWT_SECRET: ci-only-not-used-for-image-build
+      - name: Build backend image
+        run: docker build --file Dockerfile --tag career-pilot-backend:ci .
+      - name: Build frontend image
+        run: docker build --file frontend/Dockerfile --tag career-pilot-frontend:ci frontend

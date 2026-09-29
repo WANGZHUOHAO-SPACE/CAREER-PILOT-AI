@@ -1,0 +1,261 @@
+{
+  "startedAt": "2026-09-28T14:47:31.742914+00:00",
+  "modelMode": "LOCAL_TEST",
+  "realOpenAiEmbedding": "UNVERIFIED",
+  "realOpenAiChat": "UNVERIFIED",
+  "providerTokenUsage": "UNVERIFIED",
+  "semanticQuality": "UNVERIFIED",
+  "phases": [
+    {
+      "name": "initial-http-and-database",
+      "status": "PASS",
+      "vectorRows": {
+        "rows": 2,
+        "owners": [
+          "4",
+          "5"
+        ],
+        "dimensions": [
+          1536
+        ],
+        "nonNullEmbeddings": 2,
+        "documentIdsPresent": true
+      },
+      "traces": [
+        {
+          "requestId": "228e7b8d-3d91-4950-8436-021383a6fa2d",
+          "userId": 4,
+          "ragEvent": {
+            "type": "RAG_SEARCH",
+            "name": "RAG_SEARCH",
+            "status": "SUCCESS",
+            "durationMs": 34,
+            "topK": 4,
+            "chunkCount": 1,
+            "memoryMessageCount": null,
+            "createdAt": "2026-09-28T22:47:34"
+          },
+          "provider": "LOCAL_TEST"
+        },
+        {
+          "requestId": "3761683e-517e-4c90-9c52-256570d4c692",
+          "userId": 5,
+          "ragEvent": {
+            "type": "RAG_SEARCH",
+            "name": "RAG_SEARCH",
+            "status": "SUCCESS",
+            "durationMs": 2,
+            "topK": 4,
+            "chunkCount": 1,
+            "memoryMessageCount": null,
+            "createdAt": "2026-09-28T22:47:34"
+          },
+          "provider": "LOCAL_TEST"
+        }
+      ],
+      "traceIdor": 404
+    },
+    {
+      "name": "backend-restart",
+      "status": "PASS",
+      "vectorRows": {
+        "rows": 2,
+        "owners": [
+          "4",
+          "5"
+        ],
+        "dimensions": [
+          1536
+        ],
+        "nonNullEmbeddings": 2,
+        "documentIdsPresent": true
+      },
+      "traces": [
+        {
+          "requestId": "24e8ac5c-5dfc-4c39-ba70-82961462e64f",
+          "userId": 4,
+          "ragEvent": {
+            "type": "RAG_SEARCH",
+            "name": "RAG_SEARCH",
+            "status": "SUCCESS",
+            "durationMs": 56,
+            "topK": 4,
+            "chunkCount": 1,
+            "memoryMessageCount": null,
+            "createdAt": "2026-09-28T22:47:50"
+          },
+          "provider": "LOCAL_TEST"
+        },
+        {
+          "requestId": "dcae13b7-7eba-4dcc-9afc-27deadcb9df4",
+          "userId": 5,
+          "ragEvent": {
+            "type": "RAG_SEARCH",
+            "name": "RAG_SEARCH",
+            "status": "SUCCESS",
+            "durationMs": 4,
+            "topK": 4,
+            "chunkCount": 1,
+            "memoryMessageCount": null,
+            "createdAt": "2026-09-28T22:47:51"
+          },
+          "provider": "LOCAL_TEST"
+        }
+      ],
+      "traceIdor": 404
+    },
+    {
+      "name": "postgres-restart",
+      "status": "PASS",
+      "vectorRows": {
+        "rows": 2,
+        "owners": [
+          "4",
+          "5"
+        ],
+        "dimensions": [
+          1536
+        ],
+        "nonNullEmbeddings": 2,
+        "documentIdsPresent": true
+      },
+      "traces": [
+        {
+          "requestId": "bae35a19-0cf0-4f4b-92b9-0bd3a4d0b04c",
+          "userId": 4,
+          "ragEvent": {
+            "type": "RAG_SEARCH",
+            "name": "RAG_SEARCH",
+            "status": "SUCCESS",
+            "durationMs": 25,
+            "topK": 4,
+            "chunkCount": 1,
+            "memoryMessageCount": null,
+            "createdAt": "2026-09-28T22:48:11"
+          },
+          "provider": "LOCAL_TEST"
+        },
+        {
+          "requestId": "94d026e2-e59b-4353-b60d-8439d107a5b4",
+          "userId": 5,
+          "ragEvent": {
+            "type": "RAG_SEARCH",
+            "name": "RAG_SEARCH",
+            "status": "SUCCESS",
+            "durationMs": 2,
+            "topK": 4,
+            "chunkCount": 1,
+            "memoryMessageCount": null,
+            "createdAt": "2026-09-28T22:48:11"
+          },
+          "provider": "LOCAL_TEST"
+        }
+      ],
+      "traceIdor": 404
+    },
+    {
+      "name": "compose-down-up",
+      "status": "PASS",
+      "vectorRows": {
+        "rows": 2,
+        "owners": [
+          "4",
+          "5"
+        ],
+        "dimensions": [
+          1536
+        ],
+        "nonNullEmbeddings": 2,
+        "documentIdsPresent": true
+      },
+      "traces": [
+        {
+          "requestId": "2cbdc978-a517-4108-a229-de3480330118",
+          "userId": 4,
+          "ragEvent": {
+            "type": "RAG_SEARCH",
+            "name": "RAG_SEARCH",
+            "status": "SUCCESS",
+            "durationMs": 27,
+            "topK": 4,
+            "chunkCount": 1,
+            "memoryMessageCount": null,
+            "createdAt": "2026-09-28T22:48:34"
+          },
+          "provider": "LOCAL_TEST"
+        },
+        {
+          "requestId": "59880bcf-7ffb-435c-ae24-38832c6f3a6c",
+          "userId": 5,
+          "ragEvent": {
+            "type": "RAG_SEARCH",
+            "name": "RAG_SEARCH",
+            "status": "SUCCESS",
+            "durationMs": 2,
+            "topK": 4,
+            "chunkCount": 1,
+            "memoryMessageCount": null,
+            "createdAt": "2026-09-28T22:48:35"
+          },
+          "provider": "LOCAL_TEST"
+        }
+      ],
+      "traceIdor": 404
+    }
+  ],
+  "users": {
+    "A": 4,
+    "B": 5
+  },
+  "totalVectorRowsBeforeUploads": 1,
+  "totalVectorRowsAfterUploads": 3,
+  "databaseFilterSql": [
+    "SELECT *, embedding <=> $1 AS distance FROM public.vector_store WHERE embedding <=> $2 < $3  AND metadata::jsonb @@ $5::jsonpath  ORDER BY distance LIMIT $4"
+  ],
+  "databaseVersion": {
+    "postgres": "16.15 (Debian 16.15-1.pgdg12+2)",
+    "pgvector": "0.8.6",
+    "columnType": "vector(1536)"
+  },
+  "deletionIsolation": {
+    "status": "PASS",
+    "remainingRows": {
+      "A": 0,
+      "B": 1
+    },
+    "userBTrace": {
+      "requestId": "1b4ebc77-aba0-42de-9fbc-f850605355b6",
+      "userId": 5,
+      "ragEvent": {
+        "type": "RAG_SEARCH",
+        "name": "RAG_SEARCH",
+        "status": "SUCCESS",
+        "durationMs": 2,
+        "topK": 4,
+        "chunkCount": 1,
+        "memoryMessageCount": null,
+        "createdAt": "2026-09-28T22:48:35"
+      },
+      "provider": "LOCAL_TEST"
+    }
+  },
+  "totalVectorRowsAfterDelete": 2,
+  "index": {
+    "hnswCosineIndex": true
+  },
+  "observationDatabase": {
+    "requests": {
+      "requestRows": 10,
+      "rowsWithTokens": 0,
+      "localProviderRows": 10
+    },
+    "events": {
+      "topK": 4,
+      "ragEvents": 10,
+      "maxDurationMs": 56,
+      "minDurationMs": 1
+    }
+  },
+  "status": "PASS",
+  "finishedAt": "2026-09-28T14:48:37.324103+00:00"
+}

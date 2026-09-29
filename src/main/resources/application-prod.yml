@@ -1,0 +1,10 @@
+server:
+  # Only the internal Nginx network can reach the backend in Compose.
+  forward-headers-strategy: framework
+  error:
+    include-message: never
+    include-stacktrace: never
+
+logging:
+  pattern:
+    level: "%5p [requestId=%X{requestId} userId=%X{userId}]"

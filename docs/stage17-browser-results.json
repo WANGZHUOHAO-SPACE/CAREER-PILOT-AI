@@ -1,0 +1,15 @@
+{
+  "mode": "LOCAL_TEST",
+  "login": "PASS",
+  "localModeBanner": "PASS",
+  "dashboard": "PASS",
+  "progressiveTokens": "PASS",
+  "stop": "PASS",
+  "refreshHistory": "PASS",
+  "knowledgePage": "PASS",
+  "observabilityDrawer": "PASS",
+  "browserErrorsOrWarnings": 0,
+  "runStatus": "CANCELLED",
+  "outputChunks": 5,
+  "cancelledAssistantRows": 0
+}
