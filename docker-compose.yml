@@ -11,11 +11,7 @@ services:
       - mysql_data:/var/lib/mysql
       - ./sql/schema.sql:/docker-entrypoint-initdb.d/01-schema.sql:ro
     healthcheck:
-      test:
-        [
-          "CMD-SHELL",
-          "mysql -h 127.0.0.1 -u \"$${MYSQL_USER}\" --password=\"$${MYSQL_PASSWORD}\" -D \"$${MYSQL_DATABASE}\" -e 'SELECT 1 FROM user_profile LIMIT 1' >/dev/null 2>&1"
-        ]
+      test: ["CMD-SHELL", "mysql -h 127.0.0.1 -u \"$${MYSQL_USER}\" --password=\"$${MYSQL_PASSWORD}\" -D \"$${MYSQL_DATABASE}\" -e 'SELECT 1 FROM user_profile LIMIT 1' >/dev/null 2>&1"]
       interval: 10s
       timeout: 5s
       start_period: 60s
@@ -32,11 +28,7 @@ services:
       - pgvector_data:/var/lib/postgresql/data
       - ./sql/pgvector-init.sql:/docker-entrypoint-initdb.d/01-pgvector.sql:ro
     healthcheck:
-      test:
-        [
-          "CMD-SHELL",
-          "pg_isready -U \"$${POSTGRES_USER}\" -d \"$${POSTGRES_DB}\" && psql -U \"$${POSTGRES_USER}\" -d \"$${POSTGRES_DB}\" -tAc \"SELECT 1 FROM pg_extension WHERE extname='vector'\" | grep -q 1"
-        ]
+      test: ["CMD-SHELL", "pg_isready -U \"$${POSTGRES_USER}\" -d \"$${POSTGRES_DB}\" && psql -U \"$${POSTGRES_USER}\" -d \"$${POSTGRES_DB}\" -tAc \"SELECT 1 FROM pg_extension WHERE extname='vector'\" | grep -q 1"]
       interval: 10s
       timeout: 5s
       start_period: 60s
@@ -59,36 +51,25 @@ services:
     environment:
       SERVER_ADDRESS: 0.0.0.0
       SPRING_PROFILES_ACTIVE: ${SPRING_PROFILES_ACTIVE:-prod}
-      LOCAL_TEST_EMBEDDING_ENABLED: ${LOCAL_TEST_EMBEDDING_ENABLED:-false}
       JAVA_TOOL_OPTIONS: "-Duser.timezone=Asia/Shanghai"
-
       DB_URL: "jdbc:mysql://mysql:3306/${MYSQL_DATABASE:?Set MYSQL_DATABASE in .env}?useUnicode=true&characterEncoding=utf8&serverTimezone=Asia/Shanghai"
       DB_USERNAME: ${MYSQL_USER:?Set MYSQL_USER in .env}
       DB_PASSWORD: ${MYSQL_PASSWORD:?Set MYSQL_PASSWORD in .env}
-
       OPENAI_API_KEY: ${OPENAI_API_KEY:-}
-      OPENAI_MODEL: ${OPENAI_MODEL:-gpt-5-mini}
-      OPENAI_EMBEDDING_MODEL: ${OPENAI_EMBEDDING_MODEL:-text-embedding-3-small}
-
       JWT_SECRET: ${JWT_SECRET:?Set JWT_SECRET in .env}
-
       CHAT_MEMORY_MAX_MESSAGES: ${CHAT_MEMORY_MAX_MESSAGES:-20}
       AI_CHAT_RATE_LIMIT: ${AI_CHAT_RATE_LIMIT:-20}
       AI_UPLOAD_RATE_LIMIT: ${AI_UPLOAD_RATE_LIMIT:-5}
-
+      OPENAI_MODEL: ${OPENAI_MODEL:-gpt-5-mini}
+      OPENAI_EMBEDDING_MODEL: ${OPENAI_EMBEDDING_MODEL:-text-embedding-3-small}
       PGVECTOR_HOST: postgres-vector
       PGVECTOR_PORT: "5432"
       PGVECTOR_DATABASE: ${PGVECTOR_DATABASE:?Set PGVECTOR_DATABASE in .env}
       PGVECTOR_USERNAME: ${PGVECTOR_USERNAME:?Set PGVECTOR_USERNAME in .env}
       PGVECTOR_PASSWORD: ${PGVECTOR_PASSWORD:?Set PGVECTOR_PASSWORD in .env}
       PGVECTOR_DIMENSIONS: ${PGVECTOR_DIMENSIONS:-1536}
-
     healthcheck:
-      test:
-        [
-          "CMD-SHELL",
-          "curl --fail --silent http://127.0.0.1:8080/api/health >/dev/null || exit 1"
-        ]
+      test: ["CMD-SHELL", "curl --fail --silent http://127.0.0.1:8080/api/health >/dev/null || exit 1"]
       interval: 10s
       timeout: 5s
       start_period: 45s
