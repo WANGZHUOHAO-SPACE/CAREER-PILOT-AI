@@ -7,36 +7,94 @@ import type { AuthUser } from '@/api/auth'
 
 export const useAuthStore = defineStore('auth', () => {
   const user = ref<AuthUser | null>(null)
-  const isAuthenticated = computed(() => !!user.value && !!getToken())
+  const initialized = ref(false)
 
-  async function fetchCurrentUser(): Promise<boolean> {
-    if (!getToken()) return false
+  let initializationPromise: Promise<void> | null = null
+
+  const isAuthenticated = computed(() => {
+    return Boolean(user.value && getToken())
+  })
+
+  function syncChatUser(userId: number | null): void {
     try {
-      user.value = await authApi.me()
-      useChatStore().setUser(user.value.id)
-      return true
-    } catch {
-      logout()
-      return false
+      useChatStore().setUser(userId)
+    } catch (error) {
+      console.error('Failed to sync chat user:', error)
+    }
+  }
+
+  async function initializeAuth(): Promise<void> {
+    if (initialized.value) {
+      return
+    }
+
+    if (initializationPromise) {
+      await initializationPromise
+      return
+    }
+
+    initializationPromise = (async () => {
+      const token = getToken()
+
+      if (!token) {
+        user.value = null
+        initialized.value = true
+        return
+      }
+
+      try {
+        const currentUser = await authApi.me()
+        user.value = currentUser
+        syncChatUser(currentUser.id)
+      } catch (error) {
+        console.error('Failed to restore authentication:', error)
+        clearToken()
+        user.value = null
+        syncChatUser(null)
+      } finally {
+        initialized.value = true
+      }
+    })()
+
+    try {
+      await initializationPromise
+    } finally {
+      initializationPromise = null
     }
   }
 
   async function login(email: string, password: string): Promise<void> {
     const result = await authApi.login(email, password)
+
     setToken(result.token)
     user.value = result.user
-    useChatStore().setUser(result.user.id)
+    initialized.value = true
+
+    syncChatUser(result.user.id)
   }
 
-  async function register(username: string, email: string, password: string): Promise<void> {
+  async function register(
+    username: string,
+    email: string,
+    password: string
+  ): Promise<void> {
     await authApi.register(username, email, password)
   }
 
   function logout(): void {
     clearToken()
     user.value = null
-    useChatStore().setUser(null)
+    initialized.value = true
+    syncChatUser(null)
   }
 
-  return { user, isAuthenticated, fetchCurrentUser, login, register, logout }
+  return {
+    user,
+    initialized,
+    isAuthenticated,
+    initializeAuth,
+    login,
+    register,
+    logout
+  }
 })
